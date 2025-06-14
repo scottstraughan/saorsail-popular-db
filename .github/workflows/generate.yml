@@ -34,7 +34,6 @@ jobs:
           -u "${{ secrets.F_DROID_DATABASE_URL }}" \
           -f "db.json" \
           -gh "${{ secrets.GITHUB_TOKEN }}" \
-          -gl "${{ secrets.GITLAB_API_TOKEN }}" \
           -d
     - name: Copy Generate DB
       run: |
