@@ -29,7 +29,7 @@ jobs:
       run: pip install -r requirements.txt --require-hashes --no-deps
     - name: Make Version Directory
       run: |
-        mkdir -r pages/v1
+        mkdir -p pages/v1
     - name: Sync F-Droid Database
       run: |
         # Sync the F-Droid database, needed to avoid CORS
