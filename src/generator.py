@@ -16,16 +16,16 @@ class Generator:
     def __init__(
         self,
         database_url: str,
-        test_mode: bool = False
+        debug: bool = False
     ):
         self.database_url = database_url
-        self.test_mode = test_mode
+        self.debug = debug
         self.github_service = GitHubService()
         self.gitlab_service = GitLabService()
 
         self.worker_pool_chunk_size = 20
         self.lock = threading.Lock()
-        self.sleep_time_between_chunk = 2# Seconds
+        self.sleep_time_between_chunk = 2  # Seconds
         self.total_work_items = 0
         self.current_work_items = 0
 
@@ -92,9 +92,6 @@ class Generator:
         self,
         apps: [RepositoryApplication]
     ) -> [RepositoryApplication]:
-        if self.test_mode:
-            apps = apps[0:50]
-
         self.total_work_items = len(apps)
         self.current_work_items = 0
 
@@ -118,7 +115,7 @@ class Generator:
         for app in apps:
             serialized = {**serialized, **app.to_dict()}
 
-        return json.dumps(serialized, indent=2 if self.test_mode else 0)
+        return json.dumps(serialized, indent=2 if self.debug else 0)
 
     def fetch_latest_database(
         self

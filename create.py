@@ -46,14 +46,6 @@ def load_command_line_args():
                                  default=False,
                                  action='store_true')
 
-    argument_parser.add_argument('-t',
-                                 '--test',
-                                 dest='test_mode',
-                                 help='Enable test mode to just check for a few apps rather than the entire collection',
-                                 required=False,
-                                 default=False,
-                                 action='store_true')
-
     return argument_parser.parse_args()
 
 
@@ -79,7 +71,7 @@ if __name__ == '__main__':
         # Vars
         print('Generating repository database....')
 
-        builder = Generator(args.database_url, args.test_mode)
+        builder = Generator(args.database_url, args.debug)
         builder.build(file_path)
 
         # Print success and time took

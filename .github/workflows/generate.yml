@@ -33,8 +33,7 @@ jobs:
         python create.py \
           -u "${{ secrets.F_DROID_DATABASE_URL }}" \
           -f "db.json" \
-          -gh "${{ secrets.GITHUB_TOKEN }}" \
-          -d
+          -gh "${{ secrets.GITHUB_TOKEN }}"
     - name: Copy Generate DB
       run: |
         mkdir v1 && cp db.json v1/
