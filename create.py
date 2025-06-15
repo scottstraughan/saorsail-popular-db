@@ -71,7 +71,7 @@ if __name__ == '__main__':
         # Vars
         print('Generating repository database....')
 
-        builder = Generator(args.database_url, args.debug)
+        builder = Generator(args.database_url, debug)
         builder.build(file_path)
 
         # Print success and time took
