@@ -27,20 +27,30 @@ jobs:
         cache: 'pip'
     - name: Install Dependencies
       run: pip install -r requirements.txt --require-hashes --no-deps
-    - name: Generate Repository Database
+    - name: Make Version Directory
       run: |
-        # Generate the DB
+        mkdir -r pages/v1
+    - name: Sync F-Droid Database
+      run: |
+        # Sync the F-Droid database, needed to avoid CORS
+        python sync.py
+    - name: Copy F-Droid DB into Version
+      run: |
+        cp repository.json pages/v1/
+    - name: Generate Popularity Database
+      run: |
+        # Generate the popular DB
         python create.py \
           -u "${{ secrets.F_DROID_DATABASE_URL }}" \
-          -f "db.json" \
+          -f "popular.json" \
           -gh "${{ secrets.GITHUB_TOKEN }}"
-    - name: Copy Generate DB
+    - name: Copy Popular DB into Version
       run: |
-        mkdir v1 && cp db.json v1/
+        cp popular.json pages/v1/
     - name: Upload DB to Artifacts
       uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
       with:
-        path: v1/
+        path: pages
 
   # Deployment job
   deploy:
