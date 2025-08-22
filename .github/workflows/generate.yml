@@ -41,6 +41,7 @@ jobs:
         cp repository.json pages/v1/
 
     - name: Generate Popularity Database
+      if: false
       run: |
         # Generate the popular DB
         python generate-popular-db.py \
@@ -49,6 +50,7 @@ jobs:
           -gh "${{ secrets.GITHUB_TOKEN }}"
 
     - name: Copy Popular DB File
+      if: false
       run: |
         cp popular.json pages/v1/
 

@@ -2,7 +2,7 @@ import logging
 import time
 from argparse import ArgumentParser
 
-from src.embeddings.embeddings import Embeddings
+from src.embeddings import Embeddings
 
 
 def load_command_line_args():
