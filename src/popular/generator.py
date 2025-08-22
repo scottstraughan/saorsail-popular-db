@@ -6,10 +6,10 @@ import requests
 
 from concurrent.futures import ThreadPoolExecutor
 from typing import Callable
-from src import RepositoryApplication
-from src.services import RateLimited, SkippableError
-from src.services.github import GitHubService
-from src.services.gitlab import GitLabService
+from src.popular import RepositoryApplication
+from src.popular.services import RateLimited, SkippableError
+from src.popular.services.github import GitHubService
+from src.popular.services.gitlab import GitLabService
 
 
 class Generator:

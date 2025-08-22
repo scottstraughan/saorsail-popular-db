@@ -1,4 +1,4 @@
-from src.services import Service, SkippableError
+from src.popular.services import Service, SkippableError
 
 
 class GitLabService(Service):

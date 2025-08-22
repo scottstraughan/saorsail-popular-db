@@ -23,28 +23,45 @@ jobs:
       with:
         python-version: '3.11'
         cache: 'pip'
+
     - name: Install Dependencies
       run: pip install -r requirements.txt --require-hashes --no-deps
+
     - name: Make Version Directory
       run: |
         mkdir -p pages/v1
+
     - name: Sync F-Droid Database
       run: |
         # Sync the F-Droid database, needed to avoid CORS
         python sync.py
+
     - name: Copy F-Droid DB into Version
       run: |
         cp repository.json pages/v1/
+
     - name: Generate Popularity Database
       run: |
         # Generate the popular DB
-        python create.py \
+        python generate-popular-db.py \
           -u "${{ secrets.F_DROID_DATABASE_URL }}" \
           -f "popular.json" \
           -gh "${{ secrets.GITHUB_TOKEN }}"
-    - name: Copy Popular DB into Version
+
+    - name: Copy Popular DB File
       run: |
         cp popular.json pages/v1/
+
+    - name: Generate Embeddings
+      run: |
+        python generate-embeddings.py \
+          -u "repository.json" \
+          -f "embeddings.json"
+
+    - name: Copy Embeddings File
+      run: |
+        cp embeddings.json pages/v1/
+
     - name: Upload DB to Artifacts
       uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
       with:

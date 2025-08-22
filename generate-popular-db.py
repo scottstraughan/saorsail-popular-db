@@ -2,9 +2,9 @@ import logging
 import time
 from argparse import ArgumentParser
 
-from src.generator import Generator
-from src.services.github import GitHubService
-from src.services.gitlab import GitLabService
+from src.popular.generator import Generator
+from src.popular.services.github import GitHubService
+from src.popular.services.gitlab import GitLabService
 
 
 def load_command_line_args():

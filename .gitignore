@@ -2,3 +2,8 @@
 .idea
 __pycache__
 .DS_Store
+
+# Generated files
+repository.json
+embeddings.json
+popular.json
